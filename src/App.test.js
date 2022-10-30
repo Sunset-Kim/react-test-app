@@ -1,15 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("App render after count 0", () => {
   render(<App />);
 
-  const lintTest = screen.getByRole("button", {
-    name: "lintTest",
-  });
+  const countElement = screen.getByTestId("count");
 
-  expect(lintTest).toHaveTextContent("lintTest");
-
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(countElement).toBe(0);
 });
