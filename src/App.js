@@ -36,7 +36,12 @@ function App() {
         +
       </button>
 
-      <button type='button' data-testid='btn-display' onClick={handleToggle}>
+      <button
+        type='button'
+        data-testid='btn-display'
+        onClick={handleToggle}
+        style={{ backgroundColor: "tomato" }}
+      >
         on/off
       </button>
     </div>

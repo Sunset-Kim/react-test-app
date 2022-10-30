@@ -41,11 +41,15 @@ test("on/off button render", () => {
   render(<App />);
   const displayButton = screen.getByTestId("btn-display");
   expect(displayButton).toHaveTextContent("on/off");
+  expect(displayButton).toHaveStyle(`
+  background: tomato;
+  `);
 });
 
 test("when click on/off button, disable plus, minus button", () => {
   render(<App />);
   const displayButton = screen.getByTestId("btn-display");
+
   fireEvent.click(displayButton);
 
   const plusButton = screen.getByTestId("btn-plus");
