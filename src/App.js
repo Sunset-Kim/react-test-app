@@ -1,23 +1,49 @@
-import logo from "./logo.svg";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [disabled, setDisabled] = useState(false);
+
+  const increaseCount = () => {
+    setCount(count + 1);
+  };
+
+  const decreaseCount = () => {
+    setCount(count - 1);
+  };
+
+  const handleToggle = () => setDisabled(!disabled);
+
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div data-testid='count'>{count}</div>
+      <button
+        type='button'
+        data-testid='btn-minus'
+        disabled={disabled}
+        onClick={() => decreaseCount()}
+      >
+        -
+      </button>
+
+      <button
+        type='button'
+        data-testid='btn-plus'
+        disabled={disabled}
+        onClick={() => increaseCount()}
+      >
+        +
+      </button>
+
+      <button
+        type='button'
+        data-testid='btn-display'
+        onClick={handleToggle}
+        style={{ backgroundColor: "tomato" }}
+      >
+        on/off
+      </button>
     </div>
   );
 }

@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 0. 연습: count app 구현
 
-## Available Scripts
+### 사용한 query
 
-In the project directory, you can run:
+- getByTestId
+  dom 요소에 'data-testid' 라는 attribute를 설정해 선택하는 방법.
 
-### `npm start`
+```jsx
+// button.jsx
+<button data-testid='button'>+</button>;
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+// button.test.js
+const buttonElement = screen.getByTestId("button");
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 사용한 매쳐
 
-### `npm test`
+- toHaveTextContent
+- toHaveStyle
+- toBeDisabled
+- toBeEnabled
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 1. 더 나은 테스트를 위해 알아야 할 것
 
-### `npm run build`
+### Query 사용 우선순위
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> [공식문서 Priority](https://testing-library.com/docs/queries/about#priority)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. getByRole
+2. getByLabelText
+3. getByPlaceholderText
+4. getByText
+5. getByDisplayValue
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6. getByAltText
+7. getByTitle
 
-### `npm run eject`
+8. getByTestId
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### fireEvent vs userEvent
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> userEvent는 fireEvent를 사용해서 만들어졌습니다.
+> userEvent는 각각의 엘리먼트 타입에 따라 더욱 적절한 반응을 보여줍니다
+> 예를 들어 버튼을 fireEvent로 click 하면 focus가 되지 않지만, userEvent는 focust가 됩니다.
